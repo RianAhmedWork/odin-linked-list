@@ -21,6 +21,7 @@ class LinkedList {
     append(value, list.next);
   }
 
+  // prepend the value to the start of the list
   prepend(value) {
     // create node from the value
     const newNode = new Node(value);
@@ -32,6 +33,23 @@ class LinkedList {
     // prepend the value to the start of the list
     const newStart = { value: newNode.value, next: this.list };
     this.list = newStart;
+  }
+
+  // returns the total number of elements in the list;
+  size(counter = 0, list = this.list) {
+    let counter = 0;
+    // if the list has no elements we return 0
+    if (Object.keys(this.list).length === 0) {
+      return counter;
+    }
+    // if the next value in the list is null we return the counter + 1
+    // else we increase the counter and recursively call the function
+    if (list.next === null) {
+      return counter + 1;
+    } else {
+      counter++;
+      this.size(counter, list.next);
+    }
   }
 }
 
