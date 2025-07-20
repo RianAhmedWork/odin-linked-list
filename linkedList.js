@@ -61,6 +61,22 @@ class LinkedList {
     // return the first element in the list
     return this.list.value;
   }
+
+  // return the last element in the list;
+  tail(list = this.list) {
+    // if the list is empty return a string
+    if (Object.keys(list).length === 0) {
+      return "Empty List";
+    }
+
+    // if the next pointer is null we return the value
+    // else we call the function again
+    if (list.next === null) {
+      return list.value;
+    } else {
+      tail(list.value);
+    }
+  }
 }
 
 class Node {
