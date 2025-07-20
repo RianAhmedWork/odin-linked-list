@@ -20,6 +20,19 @@ class LinkedList {
     // if the next value is not null we recursively call the function
     append(value, list.next);
   }
+
+  prepend(value) {
+    // create node from the value
+    const newNode = new Node(value);
+    // if the list is empty prepend it
+    if (Object.keys(list).length === 0) {
+      list.value = newNode.value;
+      list.next = newNode.nextNode;
+    }
+    // prepend the value to the start of the list
+    const newStart = { value: newNode.value, next: this.list };
+    this.list = newStart;
+  }
 }
 
 class Node {
