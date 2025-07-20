@@ -51,6 +51,16 @@ class LinkedList {
       this.size(counter, list.next);
     }
   }
+
+  // return the first element in the list;
+  head() {
+    // if the list is empty return a string
+    if (Object.keys(this.list).length === 0) {
+      return "Empty List";
+    }
+    // return the first element in the list
+    return this.list.value;
+  }
 }
 
 class Node {
