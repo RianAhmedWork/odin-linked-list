@@ -7,13 +7,17 @@ class LinkedList {
     this.tail = null;
   }
 
+  isEmpty() {
+    return this.head === null && this.tail === null;
+  }
+
   // append to the end of the list
   append(value) {
     const newNode = new Node(value);
     // if the list is empty append a node
     // else add the new node to the tail of the current one
     // and update the tail
-    if (this.head === null && this.tail === null) {
+    if (this.isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -27,7 +31,7 @@ class LinkedList {
     // create node from the value
     const newNode = new Node(value);
     // if the list is empty prepend it
-    if (this.head === null && this.tail === null) {
+    if (this.isEmpty()) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -39,7 +43,7 @@ class LinkedList {
   // returns the total number of elements in the list;
   size() {
     // if the list has no elements we return 0
-    if (this.head === null && this.tail === null) {
+    if (this.isEmpty()) {
       return 0;
     }
     // if the nextNode value is not null we update the tempNode to the next
@@ -66,7 +70,7 @@ class LinkedList {
   // returns the node at the specified index
   at(index) {
     // if the list is empty we return a string
-    if (this.head === null && this.tail === null) {
+    if (this.isEmpty()) {
       throw new Error("List is empty");
     }
 
@@ -87,7 +91,7 @@ class LinkedList {
   // pop the last node
   pop() {
     // if the list is empty we throw an error
-    if (this.head === null && this.tail === null) {
+    if (this.isEmpty()) {
       throw new Error("List is empty");
     }
 
@@ -169,7 +173,7 @@ class LinkedList {
     }
 
     // go through the list until the node before
-    // the one we want to remove
+    // the one we want to insert at
     let counter = 0;
     let tempNode = this.head;
     while (counter !== index - 1) {
@@ -193,7 +197,7 @@ class LinkedList {
     const listSize = this.size();
 
     // throw error if index is out of bounds
-    if (index > listSize) {
+    if (index >= listSize || index < 0) {
       throw new Error("Index out of bound");
     }
     let tempNode = this.head;
