@@ -1,3 +1,5 @@
+export { LinkedList };
+
 class LinkedList {
   // set the head and tail to be empty until a value is appended
   constructor() {
@@ -52,12 +54,12 @@ class LinkedList {
   }
 
   // return the first element in the list;
-  head() {
+  getHead() {
     return this.head;
   }
 
   // return the last node in the list;
-  tail() {
+  getTail() {
     return this.tail;
   }
 
@@ -147,6 +149,80 @@ class LinkedList {
     }
     tempString += `${null}`;
     return tempString;
+  }
+
+  // insert a value at the specified index
+  insertAt(value, index) {
+    // store the size of the list
+    const listSize = this.size();
+
+    // throw an error if index is out of bounds
+    if (index > listSize) {
+      throw new Error("Index is out of bounds");
+    }
+
+    // if we want to append at the start of the list
+    // call the prepend method
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    // go through the list until the node before
+    // the one we want to remove
+    let counter = 0;
+    let tempNode = this.head;
+    while (counter !== index - 1) {
+      tempNode = tempNode.nextNode;
+      counter++;
+    }
+    let insertedNode = new Node(value);
+    insertedNode.nextNode = tempNode.nextNode;
+    tempNode.nextNode = insertedNode;
+
+    // if we insert at the end make sure
+    // to update the tail
+    if (index === listSize) {
+      this.tail = insertedNode;
+    }
+  }
+
+  // remove the node at the specified index
+  removeAt(index) {
+    // store the size of the list
+    const listSize = this.size();
+
+    // throw error if index is out of bounds
+    if (index > listSize) {
+      throw new Error("Index out of bound");
+    }
+    let tempNode = this.head;
+
+    // if removing at the head, update
+    // the head
+    if (index === 0) {
+      tempNode = tempNode.nextNode;
+      this.head = tempNode;
+      return;
+    }
+
+    // if removing at the tail, call
+    // pop method
+    if (index === listSize - 1) {
+      this.pop();
+      return;
+    }
+
+    // loop through until right before
+    // the specified index then change
+    // the pointer
+    let counter = 0;
+    while (counter !== index - 1) {
+      tempNode = tempNode.nextNode;
+      counter++;
+    }
+    let nodeToRemove = tempNode.nextNode;
+    tempNode.nextNode = nodeToRemove.nextNode;
   }
 }
 
