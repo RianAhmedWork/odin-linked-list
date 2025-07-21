@@ -35,8 +35,7 @@ class LinkedList {
   }
 
   // returns the total number of elements in the list;
-  size(counter = 0, list = this.list) {
-    let counter = 0;
+  size(counter = 0) {
     // if the list has no elements we return 0
     if (Object.keys(this.list).length === 0) {
       return counter;
@@ -53,28 +52,12 @@ class LinkedList {
 
   // return the first element in the list;
   head() {
-    // if the list is empty return a string
-    if (Object.keys(this.list).length === 0) {
-      return "Empty List";
-    }
-    // return the first node in the list
-    return this.list.value;
+    return this.head;
   }
 
   // return the last node in the list;
-  tail(list = this.list) {
-    // if the list is empty return a string
-    if (Object.keys(list).length === 0) {
-      return "Empty List";
-    }
-
-    // if the next pointer is null we return the value
-    // else we call the function again
-    if (list.next === null) {
-      return list.value;
-    } else {
-      tail(list.value);
-    }
+  tail() {
+    return this.tail;
   }
 
   // returns the node at the specified index
