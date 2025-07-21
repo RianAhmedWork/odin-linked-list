@@ -25,13 +25,13 @@ class LinkedList {
     // create node from the value
     const newNode = new Node(value);
     // if the list is empty prepend it
-    if (Object.keys(list).length === 0) {
-      list.value = newNode.value;
-      list.next = newNode.nextNode;
+    if (this.head === undefined && this.tail === undefined) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.nextNode = this.head;
+      this.head = newNode;
     }
-    // prepend the value to the start of the list
-    const newStart = { value: newNode.value, next: this.list };
-    this.list = newStart;
   }
 
   // returns the total number of elements in the list;
