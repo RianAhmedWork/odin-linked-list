@@ -1,8 +1,8 @@
 class LinkedList {
   // set the head and tail to be empty until a value is appended
   constructor() {
-    this.head = undefined;
-    this.tail = undefined;
+    this.head = null;
+    this.tail = null;
   }
 
   // append to the end of the list
@@ -11,7 +11,7 @@ class LinkedList {
     // if the list is empty append a node
     // else add the new node to the tail of the current one
     // and update the tail
-    if (this.head === undefined && this.tail === undefined) {
+    if (this.head === null && this.tail === null) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -25,7 +25,7 @@ class LinkedList {
     // create node from the value
     const newNode = new Node(value);
     // if the list is empty prepend it
-    if (this.head === undefined && this.tail === undefined) {
+    if (this.head === null && this.tail === null) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -37,7 +37,7 @@ class LinkedList {
   // returns the total number of elements in the list;
   size() {
     // if the list has no elements we return 0
-    if (this.head === undefined && this.tail === undefined) {
+    if (this.head === null && this.tail === null) {
       return 0;
     }
     // if the nextNode value is not null we update the tempNode to the next
@@ -64,8 +64,8 @@ class LinkedList {
   // returns the node at the specified index
   at(index) {
     // if the list is empty we return a string
-    if (this.head === undefined && this.tail === undefined) {
-      throw new Error("Empty List");
+    if (this.head === null && this.tail === null) {
+      throw new Error("List is empty");
     }
 
     if (index >= this.size()) {
@@ -80,6 +80,73 @@ class LinkedList {
       tempNode = tempNode.nextNode;
     }
     return tempNode;
+  }
+
+  // pop the last node
+  pop() {
+    // if the list is empty we throw an error
+    if (this.head === null && this.tail === null) {
+      throw new Error("List is empty");
+    }
+
+    // if the list has one node we just set both head and tail
+    // as null
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+      return;
+    }
+
+    let tempNode = this.head;
+    while (tempNode.nextNode !== this.tail) {
+      tempNode = tempNode.nextNode;
+    }
+    tempNode.nextNode = null;
+    this.tail = tempNode;
+  }
+
+  // returns true if it finds the value false if not
+  contains(value) {
+    // search through the list until a match is found
+    // or we reach the end
+    let tempNode = this.head;
+    while (tempNode !== null) {
+      if (value === tempNode.value) {
+        return true;
+      }
+      tempNode = tempNode.nextNode;
+    }
+    return false;
+  }
+
+  // find the index of the value if not return null
+  find(value) {
+    // search through the list until the value is found
+    // and return the index at that value else return null
+    let counter = 0;
+    let tempNode = this.head;
+    while (tempNode !== null) {
+      if (value === tempNode.value) {
+        return counter;
+      }
+      counter++;
+      tempNode = tempNode.nextNode;
+    }
+    return null;
+  }
+
+  // represent the list as a string
+  toString() {
+    // go through the list from head to tail
+    // add it to a string and return it
+    let tempString = "";
+    let tempNode = this.head;
+    while (tempNode !== null) {
+      tempString += `( ${tempNode.value} ) -> `;
+      tempNode = tempNode.nextNode;
+    }
+    tempString += `${null}`;
+    return tempString;
   }
 }
 
