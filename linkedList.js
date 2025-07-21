@@ -62,19 +62,24 @@ class LinkedList {
   }
 
   // returns the node at the specified index
-  at(index, counter = 0, list = this.list) {
+  at(index) {
     // if the list is empty we return a string
-    if (Object.keys(list).length === 0) {
-      return "Empty List";
+    if (this.head === undefined && this.tail === undefined) {
+      throw new Error("Empty List");
+    }
+
+    if (index >= this.size()) {
+      throw new Error("Index out of bounds");
     }
 
     // if the index matches the counter we return the value
-    if (index === counter) {
-      return list.value;
-    } else {
+    let counter = 0;
+    let tempNode = this.head;
+    while (index !== counter) {
       counter++;
-      at(index, counter, list.next);
+      tempNode = tempNode.nextNode;
     }
+    return tempNode;
   }
 }
 
