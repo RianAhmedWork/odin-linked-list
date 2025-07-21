@@ -35,19 +35,20 @@ class LinkedList {
   }
 
   // returns the total number of elements in the list;
-  size(counter = 0) {
+  size() {
     // if the list has no elements we return 0
-    if (Object.keys(this.list).length === 0) {
-      return counter;
+    if (this.head === undefined && this.tail === undefined) {
+      return 0;
     }
-    // if the next value in the list is null we return the counter + 1
-    // else we increase the counter and recursively call the function
-    if (list.next === null) {
-      return counter + 1;
-    } else {
+    // if the nextNode value is not null we update the tempNode to the next
+    // and increment the counter
+    let tempNode = this.head;
+    let counter = 0;
+    while (tempNode !== null) {
       counter++;
-      this.size(counter, list.next);
+      tempNode = tempNode.nextNode;
     }
+    return counter;
   }
 
   // return the first element in the list;
