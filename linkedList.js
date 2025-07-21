@@ -1,24 +1,23 @@
 class LinkedList {
+  // set the head and tail to be empty until a value is appended
   constructor() {
-    this.list = {};
+    this.head = undefined;
+    this.tail = undefined;
   }
 
   // append to the end of the list
-  append(value, list = this.list) {
-    // create a node from the value
+  append(value) {
     const newNode = new Node(value);
-    // if the object is empty append it
-    if (Object.keys(list).length === 0) {
-      list.value = newNode.value;
-      list.next = newNode.nextNode;
+    // if the list is empty append a node
+    // else add the new node to the tail of the current one
+    // and update the tail
+    if (this.head === undefined && this.tail === undefined) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.nextNode = newNode;
+      this.tail = newNode;
     }
-    // if the next value is null append it
-    if (list.next === null) {
-      list.next = { value: newNode.value, next: newNode.nextNode };
-    }
-
-    // if the next value is not null we recursively call the function
-    append(value, list.next);
   }
 
   // prepend the value to the start of the list
@@ -58,11 +57,11 @@ class LinkedList {
     if (Object.keys(this.list).length === 0) {
       return "Empty List";
     }
-    // return the first element in the list
+    // return the first node in the list
     return this.list.value;
   }
 
-  // return the last element in the list;
+  // return the last node in the list;
   tail(list = this.list) {
     // if the list is empty return a string
     if (Object.keys(list).length === 0) {
@@ -77,11 +76,27 @@ class LinkedList {
       tail(list.value);
     }
   }
+
+  // returns the node at the specified index
+  at(index, counter = 0, list = this.list) {
+    // if the list is empty we return a string
+    if (Object.keys(list).length === 0) {
+      return "Empty List";
+    }
+
+    // if the index matches the counter we return the value
+    if (index === counter) {
+      return list.value;
+    } else {
+      counter++;
+      at(index, counter, list.next);
+    }
+  }
 }
 
 class Node {
-  constructor() {
-    this.value = null;
+  constructor(value) {
+    this.value = value;
     this.nextNode = null;
   }
 }
